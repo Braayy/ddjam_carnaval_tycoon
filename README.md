@@ -1,4 +1,4 @@
-# Carnaval Tycoon
+# Foliópolis: Carnaval Tycoon
 
 # Game Jam
 [DDJam Carnaval](https://itch.io/jam/ddjam-carnaval)
