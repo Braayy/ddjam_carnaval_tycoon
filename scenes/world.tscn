@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dopl3had07tgm"]
+
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="1_qjuvd"]
+[ext_resource type="Script" path="res://scripts/Bound.gd" id="2_y0oxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrn1e"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pobw6"]
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_a66du"]
+
+[node name="World" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 4.32429, 0)
+script = ExtResource("1_qjuvd")
+speed = 10.0
+
+[node name="Bound" type="Area2D" parent="Camera3D"]
+script = ExtResource("2_y0oxd")
+bound = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera3D/Bound"]
+shape = SubResource("RectangleShape2D_wrn1e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_pobw6")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_a66du")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 22.0
+offset_right = -39.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
