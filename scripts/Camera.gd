@@ -1,4 +1,5 @@
 extends Camera3D
+class_name TycoonCamera
 
 enum CameraMode {
 	PAN,
@@ -13,7 +14,7 @@ enum CameraMode {
 @export var zoom_speed: float
 var zoom := 1.0
 
-@onready var movement_viewer: Line2D = $MovementViewer
+@onready var movement_viewer: Line2D = $PanViewer
 
 var origin_pos := Vector2.ZERO
 var moving := false
@@ -24,12 +25,12 @@ var pan_position := Vector3.ZERO
 var pan_rotation := Vector3.ZERO
 var mode := CameraMode.PAN
 
-func _ready():
+func _ready() -> void:
 	pan_position = position
 	pan_rotation = rotation_degrees
 	no_zoom_position = position
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	var mouse_position := get_viewport().get_mouse_position()
 	
 	if Input.is_action_just_pressed("ui_accept"):
@@ -57,23 +58,27 @@ func _process(delta: float):
 			pan_rotation = rotation_degrees
 	
 	position = no_zoom_position + get_global_transform().basis.z.normalized() * zoom
+	
+	if mode == CameraMode.DEFINING_PATH:
+		var zoom01 := (zoom + absf(min_zoom)) / (max_zoom + absf(min_zoom))
+		size = 2.5 + (zoom01) * (25 - 2.5)
 
-
-func _on_ui_view_path():
-	mode = CameraMode.DEFINING_PATH
-	position.y = 30
-	rotation_degrees.x = -90
-	projection = Camera3D.PROJECTION_ORTHOGONAL
-
-func _on_ui_camera_pan():
-	mode = CameraMode.PAN
-	position = no_zoom_position + get_global_transform().basis.z.normalized() * zoom
-	rotation_degrees = pan_rotation
-	projection = Camera3D.PROJECTION_PERSPECTIVE
-
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == 4 and event.pressed:
 			zoom = clamp(zoom - zoom_speed, min_zoom, max_zoom)
 		if event.button_index == 5 and event.pressed:
 			zoom = clamp(zoom + zoom_speed, min_zoom, max_zoom)
+
+func set_mode(mode: CameraMode) -> void:
+	self.mode = mode
+	
+	match mode:
+		CameraMode.PAN:
+			position = no_zoom_position + get_global_transform().basis.z.normalized() * zoom
+			rotation_degrees = pan_rotation
+			projection = Camera3D.PROJECTION_PERSPECTIVE
+		CameraMode.DEFINING_PATH:
+			position.y = 30
+			rotation_degrees.x = -90
+			projection = Camera3D.PROJECTION_ORTHOGONAL

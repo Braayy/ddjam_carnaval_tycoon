@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://cutefn147hbl0"]
+
+[ext_resource type="Script" path="res://scripts/RequestVisual.gd" id="1_4onlg"]
+[ext_resource type="Theme" uid="uid://bof2ag4orsmsx" path="res://themes/Request.tres" id="1_elvgc"]
+[ext_resource type="FontFile" uid="uid://b63odd7yeuj17" path="res://fonts/Montserrat-Regular.ttf" id="2_b4lk1"]
+[ext_resource type="FontFile" uid="uid://cbqq3y5oku6v7" path="res://fonts/Montserrat-Bold.ttf" id="3_get46"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvc08"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Request Visual" type="Panel"]
+custom_minimum_size = Vector2(400, 0)
+offset_right = 400.0
+offset_bottom = 584.0
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cvc08")
+script = ExtResource("1_4onlg")
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_elvgc")
+theme_override_font_sizes/font_size = 31
+text = "Solicitação de Bloquinho"
+horizontal_alignment = 1
+
+[node name="General Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_elvgc")
+theme_override_fonts/normal_font = ExtResource("2_b4lk1")
+theme_override_fonts/bold_font = ExtResource("3_get46")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+fit_content = true
+
+[node name="Time Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_elvgc")
+bbcode_enabled = true
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("1_elvgc")
+theme_override_constants/separation = 9
+alignment = 1
+
+[node name="Accept" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Aceitar"
+
+[node name="Reject" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Rejeitar"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Reject" to="." method="_on_reject_pressed"]

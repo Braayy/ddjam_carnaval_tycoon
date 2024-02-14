@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bof2ag4orsmsx"]
+
+[ext_resource type="FontFile" uid="uid://b63odd7yeuj17" path="res://fonts/Montserrat-Regular.ttf" id="1_1p3oc"]
+[ext_resource type="FontFile" uid="uid://cbqq3y5oku6v7" path="res://fonts/Montserrat-Bold.ttf" id="2_e63xc"]
+[ext_resource type="FontFile" uid="uid://bmbp2dfloysha" path="res://fonts/RobotoMono-Regular.ttf" id="3_bymuf"]
+
+[resource]
+default_font = ExtResource("3_bymuf")
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_1p3oc")
+Label/fonts/font = ExtResource("1_1p3oc")
+RichTextLabel/fonts/bold_font = ExtResource("2_e63xc")
+RichTextLabel/fonts/normal_font = ExtResource("1_1p3oc")

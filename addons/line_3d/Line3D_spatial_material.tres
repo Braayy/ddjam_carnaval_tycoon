@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://barp2g4gwpw7k"]
+
+[resource]
+resource_local_to_scene = true
+vertex_color_use_as_albedo = true

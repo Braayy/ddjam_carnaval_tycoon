@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="Carnaval Tycoon"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/World.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/shadowed_variable=0
+gdscript/warnings/untyped_declaration=2
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/line_3d/plugin.cfg")
 
 [rendering]
 

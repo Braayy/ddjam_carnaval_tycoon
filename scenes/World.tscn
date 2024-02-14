@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dopl3had07tgm"]
+
+[ext_resource type="Script" path="res://scripts/World.gd" id="1_apcwj"]
+[ext_resource type="PackedScene" uid="uid://dbi1ugyp8rd08" path="res://scenes/UI.tscn" id="2_n7d1w"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_m5sxe"]
+[ext_resource type="Script" path="res://scripts/MovementViewer.gd" id="4_lbsb2"]
+[ext_resource type="MeshLibrary" uid="uid://ciw2k8tki3nqf" path="res://resources/tiles.tres" id="5_ox01y"]
+[ext_resource type="Script" path="res://scripts/CharacterBody3D.gd" id="6_t7sqa"]
+[ext_resource type="Texture2D" uid="uid://btsr6f0brtl7w" path="res://assets/texturas/mario.png" id="7_c2yo5"]
+
+[sub_resource type="Environment" id="Environment_d2uyj"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_uduc8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev5fk"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_apcwj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d2uyj")
+
+[node name="Time" type="Timer" parent="."]
+autostart = true
+
+[node name="UI" parent="." instance=ExtResource("2_n7d1w")]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 17.3325, 6.39722, 0)
+script = ExtResource("3_m5sxe")
+speed = 10.0
+deadzone_radius = 20.0
+min_zoom = -5.0
+max_zoom = 15.0
+zoom_speed = 0.5
+
+[node name="PanViewer" type="Line2D" parent="Camera"]
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+script = ExtResource("4_lbsb2")
+color_speed = 0.5
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("5_ox01y")
+cell_size = Vector3(2, 4, 2)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(8, 65530, 2, 8, 65531, 2, 8, 65532, 2, 8, 65533, 2, 8, 65534, 2, 8, 65535, 2, 8, 0, 2, 8, 1, 2, 7, 1, 1, 7, 0, 1, 7, 65533, 1, 7, 65532, 1, 7, 65531, 0, 7, 65530, 1, 9, 65530, 1048576, 9, 65531, 1, 9, 65532, 0, 9, 65533, 1, 9, 0, 1, 9, 1, 1, 9, 65535, 0, 9, 65534, 0, 7, 65534, 0, 7, 65535, 0, 7, 65528, 0, 9, 65527, 0, 8, 65529, 2, 8, 65528, 2, 8, 65527, 2, 7, 65529, 1, 7, 65527, 1, 9, 65528, 1, 9, 65529, 1, 8, 65526, 655363, 9, 65526, 1048578, 10, 65526, 1048578, 11, 65526, 1048578, 12, 65526, 1048578, 13, 65526, 1048578, 14, 65526, 1048578, 15, 65526, 1048578, 16, 65526, 1048578, 17, 65526, 1048580, 17, 65525, 2, 17, 65524, 2, 17, 65527, 2, 17, 65528, 2, 18, 65526, 1441794, 19, 65526, 1441794, 17, 65529, 1441793, 16, 65527, 1048576, 16, 65528, 1441793, 16, 65529, 1441793, 18, 65527, 1441793, 18, 65528, 1441793, 18, 65529, 1048576, 19, 65527, 1441793, 20, 65527, 1048576, 20, 65526, 1441793, 20, 65525, 1441793, 19, 65525, 1048576, 18, 65525, 1441793, 18, 65524, 1441793, 18, 65523, 1048576, 16, 65523, 1048576, 16, 65524, 1441793, 16, 65525, 1441793, 15, 65525, 1048576, 14, 65525, 1441793, 13, 65525, 1441793, 12, 65525, 1048576, 11, 65525, 1441793, 10, 65525, 1441793, 7, 65526, 1441793, 9, 65525, 1441793, 8, 65525, 1048576, 7, 65525, 1441793, 15, 65527, 1048577, 14, 65527, 1048576, 13, 65527, 1048577, 12, 65527, 1048576, 11, 65527, 1048577, 10, 65527, 1048577, 17, 65523, 2, 17, 65518, 2, 17, 65519, 2, 17, 65520, 2, 17, 65521, 2, 17, 65522, 2, 17, 65514, 2, 17, 65515, 2, 17, 65516, 2, 17, 65517, 2, 17, 65511, 2, 17, 65512, 2, 17, 65513, 2, 17, 65505, 2, 17, 65506, 2, 17, 65507, 2, 17, 65508, 2, 17, 65509, 2, 17, 65510, 2, 17, 65504, 655363, 18, 65504, 1048578, 20, 65504, 1048578, 19, 65504, 1048578, 21, 65504, 1048578, 22, 65504, 1048578, 23, 65504, 1048578, 24, 65504, 1048578, 25, 65504, 1048578, 26, 65504, 1048578, 27, 65504, 1048578, 28, 65504, 1048579, 28, 65505, 2, 28, 65506, 2, 28, 65507, 2, 28, 65508, 2, 28, 65509, 2, 28, 65510, 2, 28, 65511, 2, 28, 65512, 2, 28, 65513, 2, 28, 65514, 2, 28, 65515, 2, 28, 65516, 2, 28, 65517, 2, 28, 65518, 2, 28, 65519, 2, 28, 65522, 2, 28, 65523, 2, 28, 65524, 2, 28, 65525, 1, 27, 65523, 0, 27, 65524, 1, 27, 65525, 1, 27, 65526, 1, 28, 65526, 1, 29, 65526, 0, 29, 65525, 0, 29, 65524, 0, 29, 65523, 1, 27, 65505, 1, 27, 65506, 0, 27, 65507, 0, 27, 65508, 0, 27, 65509, 0, 27, 65510, 0, 27, 65511, 0, 27, 65512, 1, 27, 65513, 1, 27, 65514, 1, 27, 65515, 0, 27, 65516, 0, 27, 65517, 0, 27, 65518, 1, 27, 65519, 1, 27, 65521, 0, 27, 65522, 0, 27, 65520, 1, 29, 65504, 1, 29, 65505, 1, 29, 65506, 1, 29, 65507, 1, 29, 65508, 1, 29, 65509, 0, 29, 65510, 0, 29, 65511, 1, 29, 65512, 1, 29, 65513, 0, 29, 65514, 0, 29, 65515, 0, 29, 65516, 0, 29, 65517, 1, 29, 65518, 0, 29, 65519, 0, 29, 65520, 1, 29, 65521, 1, 29, 65522, 1, 29, 65503, 0, 28, 65503, 0, 27, 65503, 0, 26, 65503, 0, 25, 65503, 1, 24, 65503, 1, 23, 65503, 1, 22, 65503, 0, 21, 65503, 0, 20, 65503, 0, 19, 65503, 0, 18, 65503, 1, 17, 65503, 1, 16, 65503, 1, 18, 65505, 1, 19, 65505, 1, 20, 65505, 1, 21, 65505, 0, 22, 65505, 0, 23, 65505, 0, 24, 65505, 1, 25, 65505, 1, 26, 65505, 1, 18, 65506, 1, 18, 65507, 1, 18, 65508, 1, 18, 65509, 0, 18, 65510, 0, 18, 65511, 0, 18, 65512, 1, 18, 65513, 1, 18, 65514, 1, 18, 65515, 0, 18, 65516, 0, 18, 65517, 1, 18, 65518, 1, 18, 65519, 1, 18, 65520, 1, 18, 65521, 1, 18, 65522, 1, 16, 65504, 1, 16, 65505, 1, 16, 65506, 0, 16, 65507, 0, 16, 65508, 0, 16, 65509, 0, 16, 65510, 0, 16, 65511, 0, 16, 65512, 1, 16, 65513, 1, 16, 65514, 1, 16, 65515, 1, 16, 65516, 1, 16, 65517, 0, 16, 65518, 0, 16, 65519, 0, 16, 65520, 1, 16, 65521, 1, 16, 65522, 1, 28, 65521, 2, 28, 65520, 2)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Path" type="Path3D" parent="."]
+curve = SubResource("Curve3D_uduc8")
+
+[node name="PathFollow" type="PathFollow3D" parent="Path"]
+transform = Transform3D(0.999894, 0, -0.0138869, 0, 1, 0, 0.0138869, 0, 0.999895, 17.3791, 0, 2.91997)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Path/PathFollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("6_t7sqa")
+speed = 5.0
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Path/PathFollow/CharacterBody3D"]
+transform = Transform3D(0.115, 0, 0, 0, 0.0659613, 0.0942025, 0, -0.0942025, 0.0659613, 0, 0, 0)
+billboard = 1
+texture = ExtResource("7_c2yo5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path/PathFollow/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_ev5fk")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Path/PathFollow/CharacterBody3D"]
+
+[connection signal="timeout" from="Time" to="." method="_on_time_timeout"]
+[connection signal="request_accept" from="UI" to="." method="_on_ui_request_accept"]
+[connection signal="request_path" from="UI" to="." method="_on_ui_request_path"]

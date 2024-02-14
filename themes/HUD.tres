@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d1fanb6eu8oto"]
+
+[ext_resource type="FontFile" uid="uid://bmbp2dfloysha" path="res://fonts/RobotoMono-Regular.ttf" id="1_yrmw0"]
+
+[resource]
+default_font = ExtResource("1_yrmw0")
+default_font_size = 40
